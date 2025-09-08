@@ -4,15 +4,15 @@ from huggingface_hub import hf_hub_download
 import joblib
 
 # Download the model from the Model Hub
-model_path = hf_hub_download(repo_id="adityasharma0511/churn-model", filename="best_churn_model_v1.joblib")
+model_path = hf_hub_download(repo_id="adityasharma0511/Visit_with_Us", filename="best_churn_model_v1.joblib")
 
 # Load the model
 model = joblib.load(model_path)
 
 # Streamlit UI for Customer Churn Prediction
-st.title("Customer Churn Prediction App")
-st.write("The Customer Churn Prediction App is an internal tool for bank staff that predicts whether customers are at risk of churning based on their details.")
-st.write("Kindly enter the customer details to check whether they are likely to churn.")
+st.title("Customer Package Purchase prediction App")
+st.write("Customer Package Purchase prediction App is an internal tool for Visit_with_Us that predicts whether customers will buy a package or not.")
+st.write("Kindly enter the customer details to check whether they are likely to buy package.")
 
 # Collect user input
 CreditScore = st.number_input("Credit Score (customer's credit score)", min_value=300, max_value=900, value=650)

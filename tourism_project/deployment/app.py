@@ -36,6 +36,9 @@ Designation = st.selectbox("Designation", ["Manager", "Executive", "Senior Manag
 
 # Convert categorical inputs to match model training
 input_data = pd.DataFrame([{
+    'Age' = Age,
+    'CityTier' = CityTier,
+    'DurationOfPitch' = DurationOfPitch,
     'NumberOfPersonVisiting': NumberOfPersonVisiting,
     'NumberOfFollowups': NumberOfFollowups,
     'PreferredPropertyStar': PreferredPropertyStar,

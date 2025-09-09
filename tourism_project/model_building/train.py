@@ -30,7 +30,6 @@ ytest = pd.read_csv(ytest_path)
 
 # List of numerical features in the dataset
 numeric_features = [
-    'CustomerID',
     'Age',
     'CityTier',
     'DurationOfPitch',

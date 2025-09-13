@@ -19,6 +19,7 @@ target = 'ProdTaken'
 
 # List of numerical features in the dataset
 numeric_features = [
+    'CustomerID',
     'Age',
     'CityTier',
     'DurationOfPitch',

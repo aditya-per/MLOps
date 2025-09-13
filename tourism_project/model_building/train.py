@@ -142,7 +142,7 @@ with mlflow.start_run():
 
     # Log the model artifact
     mlflow.log_artifact("best_predict_model.joblib", artifact_path="model")
-    print(f"Model saved as artifact at: {model_path}")
+    print(f"Model saved as artifact at: best_predict_model.joblib")
 
     # Upload to Hugging Face
     repo_id = "adityasharma0511/predict-model"

@@ -141,7 +141,7 @@ with mlflow.start_run():
     joblib.dump(best_model, "best_predict_model.joblib")
 
     # Log the model artifact
-    mlflow.log_artifact(model_path, artifact_path="model")
+    mlflow.log_artifact("best_predict_model.joblib", artifact_path="model")
     print(f"Model saved as artifact at: {model_path}")
 
     # Upload to Hugging Face

@@ -14,12 +14,14 @@ DATASET_PATH = "hf://datasets/adityasharma0511/visit-with-us/tourism.csv"
 tourism_dataset = pd.read_csv(DATASET_PATH)
 print("Dataset loaded successfully.")
 
+# Change 'Fe Male' to 'Female' in dataset
+tourism_dataset['Gender'] = tourism_dataset['Gender'].replace('Fe Male', 'Female')
+
 # Define the target variable for the classification task
 target = 'ProdTaken'
 
-# List of numerical features in the dataset
+# List of numerical features in the dataset, leave unnamed index and CustomerID and the Target column
 numeric_features = [
-    'CustomerID',
     'Age',
     'CityTier',
     'DurationOfPitch',

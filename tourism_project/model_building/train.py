@@ -1,3 +1,4 @@
+#Creating the file to define,build and tune model
 # for data manipulation
 import pandas as pd
 import time
@@ -17,11 +18,13 @@ from huggingface_hub import login, HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError, HfHubHTTPError
 import mlflow
 
-mlflow.set_tracking_uri("https://ade83bb63316.ngrok-free.app")
+#Using ngroc link from previous step to send stats to MLflow running on local machine
+mlflow.set_tracking_uri("https://0dd098f21d7e.ngrok-free.app")
 mlflow.set_experiment("mlops-training-experiment1")
 
 api = HfApi()
 
+#Load the train and test data from the Hugging Face data space
 Xtrain_path = "hf://datasets/adityasharma0511/visit-with-us/Xtrain.csv"
 Xtest_path = "hf://datasets/adityasharma0511/visit-with-us/Xtest.csv"
 ytrain_path = "hf://datasets/adityasharma0511/visit-with-us/ytrain.csv"
@@ -95,17 +98,18 @@ with mlflow.start_run():
 
     # Log all parameter combinations and their mean test scores
     results = grid_search.cv_results_
-    #for i in range(len(results['params'])):
-    #    param_set = results['params'][i]
-    #    mean_score = results['mean_test_score'][i]
-    #    std_score = results['std_test_score'][i]
+    for i in range(len(results['params'])):
+        param_set = results['params'][i]
+        mean_score = results['mean_test_score'][i]
+        std_score = results['std_test_score'][i]
 
         # Log each combination as a separate MLflow run
-        #with mlflow.start_run(nested=True):
-        #    mlflow.log_params(param_set)
-        #    mlflow.log_metric("mean_test_score", mean_score)
-        #    mlflow.log_metric("std_test_score", std_score)
-        #    time.sleep(3) 
+        with mlflow.start_run(nested=True):
+            mlflow.log_params(param_set)
+            mlflow.log_metric("mean_test_score", mean_score)
+            mlflow.log_metric("std_test_score", std_score)
+            # Adding 3 second sleep as ngroc has a rate limit of 120 calls per miniute
+            time.sleep(2) 
 
     # Log best parameters separately in main run
     mlflow.log_params(grid_search.best_params_)

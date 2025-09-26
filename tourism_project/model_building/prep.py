@@ -1,3 +1,4 @@
+# Load the dataset from the Hugging Face data space and perform data cleaning
 # for data manipulation
 import pandas as pd
 import sklearn
@@ -14,11 +15,13 @@ DATASET_PATH = "hf://datasets/adityasharma0511/visit-with-us/tourism.csv"
 tourism_dataset = pd.read_csv(DATASET_PATH)
 print("Dataset loaded successfully.")
 
+
 # Change 'Fe Male' to 'Female' in dataset
 tourism_dataset['Gender'] = tourism_dataset['Gender'].replace('Fe Male', 'Female')
 
 # Define the target variable for the classification task
 target = 'ProdTaken'
+
 
 # List of numerical features in the dataset, leave unnamed index and CustomerID and the Target column
 numeric_features = [
@@ -53,8 +56,8 @@ X = tourism_dataset[numeric_features + categorical_features]
 y = tourism_dataset[target]
 
 
-# Split dataset into train and test
-# Split the dataset into training and test sets
+
+# Split the cleaned dataset into training and testing sets, and save them locally.
 Xtrain, Xtest, ytrain, ytest = train_test_split(
     X, y,              # Predictors (X) and target variable (y)
     test_size=0.2,     # 20% of the data is reserved for testing
@@ -67,6 +70,7 @@ ytrain.to_csv("ytrain.csv",index=False)
 ytest.to_csv("ytest.csv",index=False)
 
 
+# Upload the resulting train and test datasets back to the Hugging Face data space.
 files = ["Xtrain.csv","Xtest.csv","ytrain.csv","ytest.csv"]
 
 for file_path in files:

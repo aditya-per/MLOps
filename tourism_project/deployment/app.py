@@ -3,10 +3,10 @@ import pandas as pd
 from huggingface_hub import hf_hub_download
 import joblib
 
-# Download the model from the Model Hub
+# Download the saved model from the Hugging Face model hub
 model_path = hf_hub_download(repo_id="adityasharma0511/predict-model", filename="best_predict_model.joblib")
 
-# Load the model
+# Load the saved model from the Hugging Face model hub
 model = joblib.load(model_path)
 
 # Streamlit UI for Customer Churn Prediction
@@ -14,7 +14,7 @@ st.title("Customer Package Purchase prediction App")
 st.write("Customer Package Purchase prediction App is an internal tool for Visit_with_Us that predicts whether customers will buy a package or not.")
 st.write("Kindly enter the customer details to check whether they are likely to buy package.")
 
-# Collect user input
+# Get the inputs and save them into a dataframe
 Age = st.number_input("Age (customer's age in years)", min_value=18, max_value=100, value=30)
 CityTier = st.number_input("City Tier (customer's CityTier)", min_value=1, max_value=5, value=3)
 DurationOfPitch = st.number_input("Duration Of Pitch (DurationOfPitch to customer)", min_value=0, max_value=100, value=50)
@@ -34,7 +34,7 @@ ProductPitched = st.selectbox("Product Pitched", ["Deluxe", "Basic", "Standard",
 MaritalStatus = st.selectbox("Marital Status", ["Single", "Divorced", "Married", "Unmarried"])
 Designation = st.selectbox("Designation", ["Manager", "Executive", "Senior Manager", "AVP", "VP"])
 
-# Convert categorical inputs to match model training
+# Save the inputs into a Dataframe. Convert categorical inputs to match model training
 input_data = pd.DataFrame([{
     'Age': Age,
     'CityTier': CityTier,

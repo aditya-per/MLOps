@@ -20,7 +20,7 @@ import mlflow
 
 #Using ngroc link from previous step to send stats to MLflow running on local machine
 mlflow.set_tracking_uri("https://92fe3b317527.ngrok-free.app")
-mlflow.set_experiment("mlops-training-experiment1")
+mlflow.set_experiment("mlops-training-experiment2")
 
 api = HfApi()
 
@@ -103,17 +103,13 @@ with mlflow.start_run():
         mean_score = results['mean_test_score'][i]
         std_score = results['std_test_score'][i]
 
-        mlflow.log_params({f"grid_{i}_{k}": v for k, v in param_set.items()})
-        mlflow.log_metric(f"grid_{i}_mean_test_score", mean_score)
-        mlflow.log_metric(f"grid_{i}_std_test_score", std_score)
-        time.sleep(10) 
         # Log each combination as a separate MLflow run
-        #with mlflow.start_run(nested=True):
-            #mlflow.log_params(param_set)
-            #mlflow.log_metric("mean_test_score", mean_score)
-            #mlflow.log_metric("std_test_score", std_score)
+        with mlflow.start_run(nested=True):
+            mlflow.log_params(param_set)
+            mlflow.log_metric("mean_test_score", mean_score)
+            mlflow.log_metric("std_test_score", std_score)
             # Adding 3 second sleep as ngroc has a rate limit of 120 calls per miniute
-            #time.sleep(2) 
+            time.sleep(5) 
 
     # Log best parameters separately in main run
     mlflow.log_params(grid_search.best_params_)

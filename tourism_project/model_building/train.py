@@ -106,7 +106,7 @@ with mlflow.start_run():
         mlflow.log_params({f"grid_{i}_{k}": v for k, v in param_set.items()})
         mlflow.log_metric(f"grid_{i}_mean_test_score", mean_score)
         mlflow.log_metric(f"grid_{i}_std_test_score", std_score)
-
+        time.sleep(10) 
         # Log each combination as a separate MLflow run
         #with mlflow.start_run(nested=True):
             #mlflow.log_params(param_set)

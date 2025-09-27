@@ -19,7 +19,7 @@ from huggingface_hub.utils import RepositoryNotFoundError, HfHubHTTPError
 import mlflow
 
 #Using ngroc link from previous step to send stats to MLflow running on local machine
-mlflow.set_tracking_uri("https://2c17cd9c88ea.ngrok-free.app")
+mlflow.set_tracking_uri("https://endopoditic-miller-unveraciously.ngrok-free.dev")
 mlflow.set_experiment("mlops-training-experiment3")
 
 api = HfApi()
